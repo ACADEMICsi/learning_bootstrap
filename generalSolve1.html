@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Gardening Form</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin:20px;
+        }
+
+        input{
+            margin:5px;
+        }
+
+        #multiplePlants{
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Community Gardening Registration</h2>
+
+<form>
+
+    <h3>Gardener Information</h3>
+
+    First Name:
+    <input type="text"><br>
+
+    Surname:
+    <input type="text"><br>
+
+    Email:
+    <input type="email"><br>
+
+    Phone:
+    <input type="text"><br><br>
+
+    <h3>Plot Information</h3>
+
+    <input type="radio" name="plot" value="single"> Single Plant
+    <input type="radio" name="plot" value="multiple"> Multiple Plants
+
+    <br><br>
+
+    <!-- Single Plant -->
+    <div id="singlePlant" style="display:none;">
+        Plant Type:
+        <input type="text"><br>
+
+        Expected Yield:
+        <input type="text"><br>
+    </div>
+
+    <!-- Multiple Plants -->
+    <div id="multiplePlants" style="display:none;">
+        Number of Plants:
+        <input type="number" id="number" min="1">
+
+        <div id="plants"></div>
+    </div>
+
+</form>
+
+<script>
+
+$("input[name='plot']").change(function(){
+
+    if($(this).val()=="single"){
+        $("#singlePlant").show();
+        $("#multiplePlants").hide();
+    }
+    else{
+        $("#singlePlant").hide();
+        $("#multiplePlants").show();
+    }
+
+});
+
+$("#number").keyup(function(){
+
+    var n = $("#number").val();
+
+    $("#plants").html("");
+
+    for(var i=1;i<=n;i++){
+
+        $("#plants").append(
+
+            "<h4>Plant "+i+"</h4>" +
+
+            "Plant Type: <input type='text'><br>" +
+
+            "Expected Yield: <input type='text'><br><br>"
+
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

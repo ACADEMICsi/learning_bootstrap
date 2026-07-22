@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .box{
+            border:1px solid black;
+            padding:20px;
+            width:300px;
+        }
+
+        input,select{
+            width:100%;
+            padding:8px;
+            margin:8px 0;
+            border:1px solid gray;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            background:blue;
+            color:white;
+            border:none;
+        }
+
+        button:hover{
+            background:green;
+        }
+
+        #error{
+            color:red;
+            margin-top:10px;
+        }
+
+        #thankyou{
+            display:none;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+
+    <form id="myForm">
+
+        <h2>Event Registration</h2>
+
+        <input type="text" id="name" placeholder="Full Name">
+
+        <input type="text" id="email" placeholder="Email">
+
+        <select id="session">
+            <option value="">Select Session</option>
+            <option>Morning</option>
+            <option>Afternoon</option>
+        </select>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p id="error"></p>
+
+    <div id="thankyou"></div>
+
+</div>
+
+<script>
+
+$("#myForm").submit(function(event){
+
+    event.preventDefault();
+
+    $("#error").text("");
+
+    var name=$("#name").val();
+    var email=$("#email").val();
+    var session=$("#session").val();
+
+    var emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if(name=="" || email=="" || session==""){
+        $("#error").text("Please fill all fields.");
+        return;
+    }
+
+    if(!emailPattern.test(email)){
+        $("#error").text("Enter a valid email.");
+        return;
+    }
+
+    $("#myForm").hide();
+
+    $("#thankyou")
+        .html("<h2>Thank You!</h2><p>Hello "+name+
+              ", you registered for the <b>"+session+
+              "</b> session.</p>")
+        .fadeIn(1000);
+
+});
+
+</script>
+
+</body>
+</html>
